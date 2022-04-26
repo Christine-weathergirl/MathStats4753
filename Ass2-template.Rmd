@@ -1,0 +1,402 @@
+---
+title: 'Ass 2'
+author: "Christine Gormley"
+date: '`r format(Sys.Date(),format="%A, %B %d, %Y")`'
+output: 
+  html_document:
+    df_print: paged
+    fig_caption: true
+    highlights: pygments
+    number_sections: no
+    theme: spacelab
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE, fig.align='center'}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Questions{}
+
+## Q 1
+
+MS pg. 105- 106
+
+A. The probability that an expert will fail to identify a match print is 92.12%. 
+
+B. The probability than a novice will fail to identify a match print is 74.55%. 
+
+C. The participant is more likely to be a novice because an expert has a higher fail rate than a novice. 
+
+
+## Q 2
+
+A. You can use Baye's Rule to solve this problem. 
+
+$p(+ | user) = \frac{p(+ \cap user )}{p(user)}$
+
+$p(+ \cap user) = \frac{users\space testing\space positive}{sample \space size} = \frac{50}{1000}$
+
+$p(user) = \frac{users}{sample \space size} = \frac{100}{1000}$
+
+ $\frac{p(+ \cap user )}{p(user)} = \frac{\frac{50}{1000}}{\frac{100}{1000}}$
+ 
+ $=0.5= 50%$
+ 
+ There is 50% probability that a user will yield a positive tets result.
+ 
+ 
+  
+  
+B. 
+ 
+ 
+ $p(-|nonuser) = \frac{p(+\cap nonuser)}{p(nonuser)}$
+ 
+ $p(- \cap nonuser) = \frac{nonusers\space testing\space negative}{sample \space size} = \frac{891}{1000}$
+ 
+ $p(nonuser) = \frac{nonusers}{sample \space size} = \frac{900}{1000}$ 
+ 
+ $\frac{p(+\cap nonuser)}{p(nonuser)} =891/900$
+ 
+ 
+ The probability that a drug test for testosterone will yeild a negative result is 99%. 
+ 
+ 
+C. 
+
+$p(u | +) = \frac{p(u)p(+|u)}{p(u)p(+|u)+p(nonuser)p(+|nonuser)}$
+
+
+$p(user) = \frac{100}{1000}$
+
+$p(+|u) = \frac{\frac{50}{1000}}{.1}$, $p(+|nonuser) = \frac{\frac{9}{1000}}{.9}$
+
+$p(u|+) = \frac{(.1)(.5)}{(.1)(.5)+(.9)(.01)} = .8475$
+
+
+
+## Q 3
+
+You can prove the Multiplicative Rule by using a table. If we have a dataset with different observations from 2 different variables (ex. a, b) we can make a table of the recordings for each variable and sum them on the bottom of the column. The right side of the table you can also sum the variables and multiply the two. The total is listed in the bottom. 
+
+
+## Q 4
+
+The Permutation Rule uses factorials to describes the number of possible ways you can arrange data. 
+
+$\frac{N!}{(n-1)!}$
+
+## Q 5
+
+The Partitions Rule states you have N number of different elements and you want to partition them into different k sets. The first set n1 and the second set being n2. The number of different partitioning is this. 
+
+$\frac{N!}{n_1!n_2!...n_k!}$
+
+To prove this theorem you can do 
+
+$A = \frac{N!}{n_1!n_2!...n_k!}$
+
+solve for A using Multiplicative rule 
+
+$N! = (A)(n_1!)(n_2!)(n_k!)$
+
+$A = \frac{N!}{n_1!n_2!...n_k!}$
+
+## Q 6 
+
+The Combinations Rule can be derived by deriving the Partitions Rule. 
+
+For this rule we want to select n samples from N and and make two groups. These groups are the n that is selected from the N-n and the remaining that are not selected. 
+
+The equation describing this theorem is. 
+
+$N\choose n$ = $\frac{N!}{n!(N-n)!}$
+
+## Q 7 
+
+```{r}
+0.09+0.30+0.37+0.20+0.04
+```
+The probabilities for Y equal 1. 
+
+B. 
+
+$p(x=3 \cup x=4) = p(x=3) + p(x=4) = .20 + .04 = .24$
+
+C. 
+
+$p(x<2) = p(0)+p(1)= 0.09+0.30 = 0.39$ 
+
+## Q 8
+
+A. 
+The requirements for a discrete random sample are 
+
+0<p(y)<1 
+
+Each probability of people using an app at least once a week lies between 0 and 1. 
+The second requirement is that the probability has to be equal to one. This is shown here. 
+
+```{r}
+0.17+0.10+0.11+0.11+0.10+0.10+0.07+0.05+0.03+0.02+0.02+0.02+0.02+0.02+0.01+0.01+0.01+0.01+0.01+0.005+0.005
+```
+B. 
+
+Find the sum between p(10) and p(20).
+
+```{r}
+0.02+0.02+0.02+0.02+0.01+0.01+0.01+0.01+0.01+0.005+0.005
+```
+
+C. 
+
+Mean and variance of Y. 
+
+Mean 
+
+```{r}
+
+```
+
+
+
+## Q 9 
+
+A. Binomial probability 
+
+$P(x=10) = p(10) = \binom{25}{10}.7^{10}.3^{25-10} = 0.0013$
+
+
+B. 
+
+Probability that Y is less than or equal to 5 is a lower tail probability. 
+
+```{r}
+dbinom(,25,0.07)
+```
+
+C. 
+
+$mu = np = (25)(0.7) = 17.5$
+
+$\sigma^2 = npq = (25)(0.7)(0.30) = 5.25$
+
+$\sigma = \sqrt{\sigma^2} = \sqrt(5.25) = 2.2912$
+
+D. 
+
+The mean is 17.5 and the standard deviation is 2.2912. 
+
+
+
+
+## Q 10
+
+Multinomial Distribution 
+
+A. 
+
+N= 50 because there are 50 trains that require an assignment. 
+
+The denominator is 5^10 because there are 5 trains at each 10 tracks. 
+
+$N=50, p_k=.1$
+
+$p(y_1=5,y_2=5,y_3=5,y_4=5,y_5=5,y_6=5,y_7=5,y_8=5,y_9=5,y_10=5)=$
+
+$\frac{50!}{(5!)^{10}} \times (.1)^{50} = .0000005$
+
+B. 
+
+We want to know if there will be less than two trains assigned at Track #1. 
+This is a binomial distribution. 
+
+ $p(y=0) + p(y=1) = \binom{50}{0}\times.1^0\times.9^{49} + \binom{50}{1}\times.1^1\times.9^{50} = .0338$
+ 
+ The probability that Track # 1 is underutilized is 0.0338%. 
+ 
+## Q 11 
+
+A. 
+
+This is a geometric Distribution because you are interviewing consumers until there is a success. 
+
+The formula for the probability distribution of y is 
+
+$p(y) = pq^{y-1}$
+
+$p = \frac{12+6+4+18}{100}= 0.4$
+
+$q= 1-p = 1-0.4= 0.6$
+
+
+B. 
+
+$E(y) = \mu = \frac{1}{P} = 1/0.4 = 0.6$
+
+I interpret this result as saying the mean in equal to E(y) which from the formula for geometric distribution is 0.6. 
+
+C. 
+
+P(Y=1)
+
+$p(y) = pq^{y-1} = (0.4)(0.6)^{1-1} = 0.4$
+
+```{r}
+0.4*0.6^(1-1)
+```
+D. 
+
+First you do 
+
+$P(Y<=2)$
+
+$p(y<=2) = p(1)+p(2) = (0.4)(0.6)^{1-1} + (0.4)(0.6)^{2-1} = 0.4+ 0.24 = 0.64$
+
+Then for $p(y>2)$ you do 
+
+$1-0.64 = 0.36$ 
+
+## Q 12 
+
+Hypergeometric Distribution  
+
+A. 
+
+Find the expected number or mean. 
+
+ $\mu = \frac{nr}{N} = \frac{80}{209} = .3828$
+ 
+B.
+
+Probability that 4 out of the 10 selected treat hazardous waste on-site 
+
+$p(x=4) = \frac{\binom{8}{4} \binom{201}{6}}{\binom{209}{10}} = .00017$ 
+
+## Q 13 
+
+ 
+ $\mu = \sigma^2$ so $\sigma^2 = .03$
+ 
+For the experiment to be a Poisson Distribution it would have to follow these 3 requirements 
+
+1. Consists of counting the number of times Y a particular (rare) occurs during a given time or area or volume. 
+
+2. The probability that an event occurs in a given unit or time, area or volume is the same for all units. 
+
+3. The number of events that occur in one unit of time, area, or volume is independent of the number that occurs in other units. 
+
+C. 
+
+To find the probability that at least 3 game dat traffic fatalities will occur you use the equation for Poisson Probability Distribution. 
+
+$\lambda =.03$  
+
+$\quad y(3) = \frac{.03^3\times e^{-.03}}{3!} =4.367*10^{-6} $
+
+```{r}
+(0.03^3)*2.71828^(-0.03)/(3*2*1)
+```
+
+
+## Q 14 
+
+Solved this problem on a separate piece of paper uploaded.  
+
+
+## Q 15 
+
+Solved this problem on a separate piece of paper uploaded. 
+  
+  
+  
+
+
+
+## Q 16 
+
+
+```{r}
+1-pnorm(45,mean=50, sd= 3.2)
+```
+B. 
+
+```{r}
+pnorm(55, mean= 50, sd = 3.2 )
+```
+
+C. 
+
+```{r}
+pnorm(52,50,3.2)- pnorm(51,50,3.2)
+```
+
+
+## Q 17 
+
+
+A. 
+
+
+```{r}
+pnorm(700,605,185) - pnorm(500,605,185)
+```
+The probabiliy that the rating will fall between 500 and 700 is 0.41103.
+
+B. 
+
+
+
+```{r}
+pnorm(500,605,185)-pnorm(400,605,185)
+```
+The probability that the rating will fall between 400 and 500 is 0.15125. 
+
+
+C. 
+
+```{r}
+1-pnorm(1,000,605,185)
+```
+
+The probability that the rating will exceed 1,000 is 0.49934. 
+
+D. 
+
+```{r}
+prob <- 605 + qnorm(.9, mean=0, sd=1) * 185
+prob
+```
+
+10% of the crash testing cars will exceed the ratin of 842 points. 
+
+
+
+
+
+
+
+ 
+ 
+ 
+
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,701 @@
+---
+title: "Assignment 1"
+author: "Christine Gormley"
+date: '`r Sys.Date()` '
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I completed 14/15 problems on this assignment. 
+
+# 1: How my Final Grade Will be Calculated
+
+Assignments 4 equal valued (Total of 15%) 
+ Laboratories (Total of 10%) 
+ Projects (x2) (Total 10%) – ratio of 1:2 assessment (1/3 Project 1, 2/3 Project 
+2) 
+In class Quizzes 10%  
+Chapter online CANVAS quizzes 5% 
+Mid -Term Exams (Total 20%) 
+Final 30% 
+
+Grade percentages: A (90s) B(80s) C(60s and 70s) D(50s) F(<50) 
+This class will not be curved.  
+
+
+# 2
+
+```{r}
+getwd()
+```
+
+```{r}
+ddt = read.csv("DDT.csv")
+coplot(LENGTH~WEIGHT|RIVER*SPECIES,data=ddt,col=rainbow(6)) 
+
+ddt[ddt$RIVER=="FCM" & ddt$SPECIES=="CCATFISH",]
+
+```
+b.
+For each fish species there is a positive relationship between length and weight. The longer the length the more weight the fish has. 
+
+a.
+
+e. 
+The top six lines are empty in the plot because LMBass and SMBaffulo are not in the ECM, LSM, and SCM river. 
+
+f.
+```{r}
+ddt=read.csv("DDT.csv")
+head(ddt)
+subset(ddt,RIVER=="FCM" & SPECIES=="CCATFISH",) #or
+ddt[ddt$RIVER=="FCM" & ddt$SPECIES=="CCATFISH",]
+
+
+
+```
+
+The mean DDT value of DDT in a sample of Catfish in the FCM river is 44.66 or 45. 
+
+
+
+
+
+
+```{r}
+ddt=read.csv("DDT.csv")
+head(ddt)
+subset(ddt,RIVER=="FCM" & SPECIES=="CCATFISH",) #or
+ddt[ddt$RIVER=="FCM" & ddt$SPECIES=="CCATFISH",]
+
+```
+
+
+#  3
+
+# Quantitave or Qualitative
+
+Length of maximum span: Quantitative
+Number of vehicle lanes: Quantitative 
+Toll bridge: Qualitative
+Average daily traffic: Quantitative 
+Condition of deck: Qualitative
+Bypass or detour length: Quantitative 
+Route type: Qualitative 
+
+#  4 
+
+   The four random sampling designs are simple random samples, stratified random sampling, cluster sampling, and systematic sampling. 
+
+1. Simple Random Sampling 
+  
+    A Simple random sample ensures that every subset of fixed size in the population has the same chance of being included in the sample. 
+    
+2. Stratified Random Sampling 
+
+   A stratified random sampling is mostly used when the experimental units associated with the population can be separated into two or more groups of units. 
+
+3. Cluster Sampling 
+
+  Cluster sampling is sampling natural groupings or clusters of experimental units first ,them collect data from all experimental units within each cluster. 
+  
+4. Systematic Sampling 
+
+  Systematic sampling is just systematically selecting every nth experimental unit from a list of other experimental units. 
+  
+# 5
+
+```{r}
+mtbe=read.csv("MTBE.csv", header=TRUE) 
+head(mtbe) 
+dim(mtbe) 
+
+ind=sample(1:223,5,replace=FALSE) 
+mtbe[ind,]
+
+```
+
+i) 
+
+```{r}
+ mtbe=na.omit(mtbe)
+head(mtbe)
+```
+
+
+```{r}
+
+depth=mtbe[mtbe$Aquifier=="Bedrock",]$Depth
+sd(depth)
+
+```
+
+
+
+
+# 6
+
+```{r}
+earthquake= read.csv("EARTHQUAKE.csv")
+head(earthquake)
+ plot(ts(earthquake$MAG))
+ 
+ median(earthquake$MAG)
+
+
+```
+
+
+
+
+# 7 
+
+The data collection method of the fish was designed experiement. This was because the Corps of Engineers collected samples of fish at each river and creek location. 
+ The species of fish collected were channel catfish, largemouth bass, and smallmouth buffalofish and the total number collected was 144 fish specimens. 
+   The qualitative variables included the location (Flint Creek, Linestone Creek, Spring Creek) and species (channel catfish, largemouth bass, and smallmouth buffalofish). 
+
+# 8
+
+A. A barplot is being used to describe the data. 
+B. The variable being measure by each of the robot designs is the type of robotic limbs.
+C. Legs Only is the robot design that is used the most. 
+
+
+```{r}
+pareto<-function(x,mn="Pareto barplot",...){  # x is a vector
+x.tab=table(x)
+xx.tab=sort(x.tab, decreasing=TRUE,index.return=FALSE)
+cumsum(as.vector(xx.tab))->cs
+length(x.tab)->lenx
+bp<-barplot(xx.tab,ylim=c(0,max(cs)),las=2)
+lb<-seq(0,cs[lenx],l=11)
+axis(side=4,at=lb,labels=paste(seq(0,100,length=11),"%",sep=""),las=1,line=-1,col="Blue",col.axis="Red")
+for(i in 1:(lenx-1)){
+segments(bp[i],cs[i],bp[i+1],cs[i+1],col=i,lwd=2)
+}
+title(main=mn,...)
+
+}
+freq=c(15,8,63,20)
+RL=c("None","Both","LegsO","WheelsO")
+l=rep(RL,freq)
+
+
+```
+
+
+
+
+
+# 9 
+
+```{r}
+pareto<-function(x,mn="Pareto barplot",...){  # x is a vector
+x.tab=table(x)
+xx.tab=sort(x.tab, decreasing=TRUE,index.return=FALSE)
+cumsum(as.vector(xx.tab))->cs
+length(x.tab)->lenx
+bp<-barplot(xx.tab,ylim=c(0,max(cs)),las=2)
+lb<-seq(0,cs[lenx],l=11)
+axis(side=4,at=lb,labels=paste(seq(0,100,length=11),"%",sep=""),las=1,line=-1,col="Blue",col.axis="Red")
+for(i in 1:(lenx-1)){
+segments(bp[i],cs[i],bp[i+1],cs[i+1],col=i,lwd=2)
+}
+title(main=mn,...)
+
+}
+
+
+
+issues = c(6,32,12)
+products= c("Windows", "Explorer" , "Office")
+w= rep(products, issues)
+table= table(w)
+
+pie(table, col=rainbow(3))
+```
+Windows had the lowest security issues in 2012. 
+
+b. 
+
+```{r}
+library(qcc)
+
+pareto.chart(table, ylab = "Issues", col = "Pink", main = "Product Issues Pareto")
+```
+
+
+
+
+
+# 10 
+
+```{r}
+swdefects= read.csv("SWDEFECTS.csv", header= TRUE)
+head(swdefects)
+
+```
+```{r}
+library(plotrix)
+tab=table(swdefects$defect)
+rtab=tab/sum(tab)
+round(rtab,2)
+pie3D(rtab,labels=list("Okay","Defective"),main="Software Defects")
+
+```
+The likelihood of defective code is slim. 
+
+# 11 
+
+```{r}
+
+voltage= read.csv("VOLTAGE.csv")
+head(voltage)
+
+
+```
+```{r}
+Oldlocation = c(9.98,
+10.26,
+10.05,
+10.29,
+10.03,
+8.05,
+10.55,
+10.26,
+9.97,
+9.87,
+10.12,
+10.05,
+9.8,
+10.15,
+10,
+9.87,
+9.55,
+9.95,
+9.7,
+8.72,
+9.84,
+10.15,
+10.02,
+9.8,
+9.73,
+10.01,
+9.98,
+8.72,
+8.8,
+9.84
+)
+
+newlocation = c(9.19,
+9.63,
+10.1,
+9.7,
+10.09,
+9.6,
+10.05,
+10.12,
+9.49,
+9.37,
+10.01,
+8.82,
+9.43,
+10.03,
+9.85,
+9.27,
+8.83,
+9.39,
+9.48,
+9.64,
+8.82,
+8.65,
+8.51,
+9.14,
+9.75,
+8.78,
+9.35,
+9.54,
+9.36,
+8.68
+)
+
+O <- (Oldlocation)
+N <- (newlocation)
+
+```
+
+
+
+
+
+```{r}
+tableO=table(Oldlocation)
+tableO
+
+
+
+
+```
+```{r}
+tableN= table(newlocation)
+tableN
+```
+a. 
+```{r}
+Oldlocation
+```
+```{r}
+max(Oldlocation)
+```
+```{r}
+min(Oldlocation)
+```
+```{r}
+lept<-min(Oldlocation)-0.05
+rept<-max(Oldlocation)+0.05
+rnge<-rept-lept
+inc<-rnge/9
+inc
+```
+```{r}
+seq(lept, rept,by=inc)->cl
+cl
+
+```
+
+```{r}
+cvtn<-cut(Oldlocation,breaks=cl)
+new.tab=table(cvtn)
+barplot(new.tab,space=0,main="Frequency Histogram(Oldlocation)",las=2)
+
+
+```
+b. 
+
+```{r}
+stem(Oldlocation)
+```
+c. 
+
+
+```{r}
+newlocation
+```
+
+
+```{r}
+max(newlocation)
+```
+
+```{r}
+min(newlocation)
+```
+
+```{r}
+lept<-min(newlocation)-0.05
+rept<-max(newlocation)+0.05
+rnge<-rept-lept
+inc<-rnge/9
+inc
+```
+```{r}
+seq(lept, rept,by=inc)->cl
+cl
+
+```
+```{r}
+cvtn<-cut(newlocation,breaks=cl)
+new.tab=table(cvtn)
+barplot(new.tab,space=0,main="Frequency Histogram(newlocation)",las=2)
+```
+d. 
+
+
+e. 
+
+```{r}
+mean(Oldlocation)
+```
+```{r}
+median(Oldlocation)
+```
+```{r}
+mode(Oldlocation)
+```
+```{r}
+mean(newlocation)
+```
+```{r}
+median(newlocation)
+```
+```{r}
+mode(newlocation)
+```
+In this case the prefered central tendency is mean. 
+
+f. 
+
+```{r}
+sd= sd(Oldlocation)
+zscoreold= ((10.50- mean(Oldlocation))/(sd))
+zscoreold
+
+
+```
+g. 
+
+```{r}
+sdnew=sd(newlocation)
+zscorenew= ((10.50- mean(newlocation))/(sdnew)) 
+zscorenew
+```
+h. 
+
+The location that would be the closest to the coltage reading 10.50 would be the old location. This is becuase the distance from 10.50 according to the z score is less than the distance from the new location.  
+
+
+i. 
+
+
+```{r}
+boxplot(Oldlocation, col= "Yellow", notch= TRUE, main= "Old Location")
+```
+Yes there are outliers. 
+
+j. 
+
+```{r}
+ZOLD = ifelse(abs(zscoreold)>3, "Red",
+        ifelse(abs(zscoreold)>=2 &abs(sd)<=3,"Blue", "Black"))
+library(lattice)
+dotplot(Oldlocation,col=ZOLD, main= "Outliers for Old Location using Z scores") 
+```
+
+
+
+k. 
+
+```{r}
+boxplot(newlocation, col= "Green", notch= TRUE, main= "New Location")
+```
+There are no outliers and has a lower mean than the old location. 
+
+l.
+
+```{r}
+ZNEW = ifelse(abs(sdnew)>3, "Red",
+        ifelse(abs(sdnew)>=2 &abs(sdnew)<=3,"Blue", "Black"))
+library(lattice)
+dotplot(newlocation,col=sdnew, main= "Outliers for New Location using Z Scores")
+```
+
+
+
+
+m.
+
+```{r}
+layout(matrix(1:2,nr=2,nc=2,byrow=TRUE))
+layout.show(2)
+
+boxplot(Oldlocation, col= "yellow", notch= TRUE)
+boxplot(newlocation, col= "green", notch = TRUE)
+```
+Seeing these two graphs side by side you can see that the old location has a higher mean and more outliers than the new location on the right. 
+
+
+#12 
+
+```{r}
+pipe= read.csv("ROUGHPIPE.csv")
+head(pipe)
+```
+According to the Emperical Rule about 95% of the measurements lie within 2 standard deivations of the mean within the interval. 
+
+```{r}
+z= (pipe$ï..ROUGH-mean(pipe$ï..ROUGH))/sd(pipe$ï..ROUGH)
+
+y=length(pipe$ï..ROUGH[abs(z)< 2] / length(pipe$ï..ROUGH))
+y
+```
+
+
+
+
+
+# 13
+
+```{r}
+gobiants = read.csv("GOBIANTS.csv", header= TRUE)
+head(gobiants)
+```
+
+```{r}
+mean(gobiants$AntSpecies)
+```
+This tells us that the average number of ant species is 12.81. 
+
+```{r}
+median(gobiants$AntSpecies)
+```
+This tells us that the 5 is the middle value of species in the data set. 
+
+```{r}
+mode(gobiants$AntSpecies)
+```
+This "numeric" answer for mode means there not one species that appears to the be the most. 
+
+b. Because there are two outliers in the data set (52, 49) I would recommend using the median function the central tendency. 
+
+c. 
+
+```{r}
+DrySteppe = c(40,
+52,
+40,
+43,
+27)
+```
+
+d. 
+
+```{r}
+GobiDesert = c(30,
+16,
+30,
+56,
+22,
+14)
+
+```
+
+```{r}
+mean(GobiDesert)
+```
+```{r}
+mode(GobiDesert)
+```
+```{r}
+median(GobiDesert)
+```
+
+
+E. 
+
+The median for Gobi Desert is much lower than the median for Dry Steppe. This would mean that the total plant cover is more at the Dry Steppe than for Gobi Desert. 
+
+
+#14 
+
+```{r}
+galaxy = read.csv("GALAXY2.csv")
+head(galaxy)
+```
+a. 
+
+```{r}
+plot(ts(galaxy$ï..VELOCITY)) 
+
+```
+
+b. 
+
+
+c. 
+
+I split the velocities in two groups because there is a gap in how fast the galaxies are moving. The first group, group A, is the lower velocities and group B is the higher velocities. 
+
+```{r}
+A= c(18499,
+18792,
+18933,
+19026,
+19057,
+19111,
+19130,
+19179,
+19225,
+19404,
+19408,
+19462,
+19595,
+19619,
+19673,
+19740,
+19807,
+19866,
+20186,
+20210,
+20785)
+
+
+
+```
+
+
+```{r}
+B= c(21911,
+21993,
+22192,
+22193,
+22355,
+22417,
+22426,
+22513,
+22625,
+22647,
+22682,
+22718,
+22738,
+22744,
+22779,
+22781,
+22796,
+22809,
+22891,
+22922,
+23017,
+23059,
+23121,
+23220,
+23261,
+23292,
+23303,
+23408,
+23432,
+24909)
+
+
+```
+
+```{r}
+mean(A)
+```
+```{r}
+sd(A)
+```
+```{r}
+mean(B)
+
+sd(B)
+```
+d. 
+
+With a velocity of 20,000 km/s this galaxy would belong to cluster A. 
+
+# 15
+# ggplot
+
+```{r}
+library(ggplot2)
+asg1 = ggplot(ddt,aes(x=RIVER, y=LENGTH))
+asg1 = asg1+geom_boxplot(aes(fill=SPECIES))+labs(title="Christine Gormley")
+asg1
+```
+
