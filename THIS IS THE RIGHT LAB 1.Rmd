@@ -1,0 +1,84 @@
+---
+title: "Lab1"
+author: "Christine Gormley"
+date: "12/27/2021"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Tasks
+
+## Task 1 
+
+```{r}
+getwd() 
+```
+## Task 2
+
+Read in DDT data set
+
+```{r}
+fish <- read.csv("DDT.csv") 
+head(ddt,6)
+```
+
+
+## Task 3
+
+Variables 
+
+```{r}
+names(fish) 
+```
+Rivers are qualitative, Mile is quantitative,Species is qualitative, Length is quantitative, Weight is quantitative, and DDT is quantitative 
+
+Species in the Data Set 
+```{r}
+summary(fish $SPECIES)
+table(fish$SPECIES)
+```
+
+Weight over 800 grams
+
+```{r}
+with(fish, fish[WEIGHT>800 & SPECIES=="LMBASS",])
+```
+```{r}
+fish[fish$RIVER == "SCM",]
+
+```
+```{r}
+
+```
+## Task 4 
+
+```{r}
+table(fish$RIVER) 
+barplot(spriv,col= rainbow(4)) 
+barplot(spriv,beside=TRUE,col=1:3)
+specriv=with(fish,table(SPECIES,RIVER))
+
+```
+
+# Task 5
+
+```{r}
+
+
+```
+
+
+
+
+
+
+ 
+
+
+ 

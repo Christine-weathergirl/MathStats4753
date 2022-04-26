@@ -1,0 +1,160 @@
+---
+title: "Lab 3"
+author: "Christine Gormley"
+date: '`r Sys.Date()` '
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Task 1 
+```{r}
+getwd()
+```
+# Task 2
+
+```{r}
+spruce<-read.csv("SPRUCE.csv")
+head(spruce,6)
+
+```
+# Task 3
+
+```{r}
+with(spruce, 
+plot(Height~BHDiameter,bg="Blue",pch=21,ylim=c(0,1.1*max(Height)),xlim=c(0,1.1*max(BHDiameter)))
+)
+title("Predicting Spruce Height")
+
+
+```
+The data looks to be trending in a straight line.
+
+```{r}
+
+library(s20x)
+one = trendscatter(Height~BHDiameter,f=0.7, data=spruce)
+library(s20x)
+two = trendscatter(Height~BHDiameter,f=0.6, data=spruce)
+library(s20x)
+three = trendscatter(Height~BHDiameter,f=0.5, data=spruce)
+layout(matrix(1:4,nr=2,nc=2,byrow=TRUE))
+
+```
+
+```{r}
+cex = 1.2
+spruce.lm=with(spruce, lm(Height~BHDiameter))
+with(spruce, 
+plot(Height~BHDiameter,bg="Blue",pch=21,ylim=c(0,1.1*max(Height)),xlim=c(0,1.1*max(BHDiameter)))
+)
+
+abline(spruce.lm)
+title("Predicting Spruce Height")
+
+```
+There is a smooth curve of data on this plot. I do not think a straight line is appropriate in describing this data. 
+
+# Task 4
+
+```{r}
+layout(matrix(1:4,nr=2,nc=2,byrow=TRUE))
+layout.show(4)
+
+with(spruce, 
+plot(Height~BHDiameter,bg="Blue",pch=21,ylim=c(0,1.1*max(Height)),xlim=c(0,1.1*max(BHDiameter)))
+)
+spruce.lm=with(spruce, lm(Height~BHDiameter))
+abline(spruce.lm)
+
+with(spruce, 
+plot(Height~BHDiameter,bg="Blue",pch=21,ylim=c(0,1.1*max(Height)),xlim=c(0,1.1*max(BHDiameter)))
+)
+
+spruce.lm=with(spruce, lm(Height~BHDiameter))
+abline(spruce.lm)
+
+yhat=with(spruce,predict(spruce.lm,data.frame(BHDiameter)))
+
+with(spruce,{
+segments(BHDiameter,Height,BHDiameter,yhat)
+})
+abline(spruce.lm)
+
+with(spruce, 
+plot(Height~BHDiameter,bg="Blue",pch=21,ylim=c(0,1.1*max(Height)),xlim=c(0,1.1*max(BHDiameter)))
+)
+with(spruce, segments(BHDiameter,mean(Height),BHDiameter,yhat,col="Red"))
+MSS=with(spruce,sum((yhat-mean(Height))^2))
+MSS
+abline(spruce.lm)
+with(spruce, abline(h=mean(Height)))
+abline(spruce.lm)
+
+with(spruce, 
+plot(Height~BHDiameter,bg="Blue",pch=21,ylim=c(0,1.1*max(Height)),xlim=c(0,1.1*max(BHDiameter)))
+)
+with(spruce,abline(h=mean(Height)))
+with(spruce, segments(BHDiameter,Height,BHDiameter,mean(Height),col="Green"))
+TSS=with(spruce,sum((Height-mean(Height))^2))
+TSS
+
+
+
+
+
+
+```
+
+```{r}
+TSS=with(spruce,sum((Height-mean(Height))^2))
+TSS
+RSS=with(spruce,sum((Height-yhat)^2))
+
+RSS
+
+MSS=with(spruce,sum((yhat-mean(Height))^2))
+MSS
+RSS+ MSS
+MSS/TSS
+```
+
+MSS/TSS= 0.6569146 meaning that 65% of the height is explained through the mode BHDiameter. 
+
+# Task 5
+
+```{r}
+summary(spruce.lm)
+
+```
+ The slope is 0.48147 and the intercept of the line is 9.146.
+ The equation for the line of best fit is y=0.48147x+9.146
+```{r}
+predict(spruce.lm, data.frame(BHDiameter=c(15,18,20)))
+```
+
+# Task 6
+
+```{r}
+library(ggplot2)
+g=ggplot(spruce, aes(x=BHDiameter,y=Height,colour=BHDiameter))
+g=g+geom_point() + geom_line()+ geom_smooth(method="lm")
+g+ggtitle("Height Vs BHDiameter")
+
+
+```
+
+# Task 7
+
+![](Screenshots for Lab 3/Screenshot 1.png){ width=70% } 
+![](Screenshots for Lab 3/Screenshot 2.png){ width=70% } 
+
+  ![](Screenshots for Lab 3/Screenshot (3.png){ width=70% } 
+  
